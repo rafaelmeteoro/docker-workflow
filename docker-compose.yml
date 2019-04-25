@@ -1,0 +1,29 @@
+# version of the docker-compose to use
+version: "3"
+
+# list all the services that will be ran inside the container
+services:
+  web:
+    build:
+      # asuming all the build will be in the current working directory
+      context: .
+      # use this dockerfile for building the image
+      dockerfile: Dockerfile.dev
+    ports:
+      # mapping the ports outside the container to be ran insede the container
+      - "3000:3000"
+    volumes:
+      # don't try to map folder up against app/node_modules inside the container
+      - /app/node_modules
+      # the current working directory
+      # map that folder outside the container into the app folder inside the container
+      - .:/app
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      # don't try to map folder up against app node_modules inside the container
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
