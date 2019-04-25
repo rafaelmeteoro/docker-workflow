@@ -5,8 +5,8 @@ services:
 before_install:
   - docker build -t rafaelmeteoro/docker-workflow -f Dockerfile.dev .
 
-# script:
-#   - docker run rafaelmeteoro/docker-workflow npm run test -- --coverage
+script:
+  - docker run rafaelmeteoro/docker-workflow npm run test -- --coverage
 
 # deplayment to AWS configuration
 # travis-ci has a predefined of different providers or hosting services
